@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "26340756166",
+    "firebase_url": "https://chat-flutter-642fb.firebaseio.com",
+    "project_id": "chat-flutter-642fb",
+    "storage_bucket": "chat-flutter-642fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26340756166:android:35e642136805a7ccaba5c7",
+        "android_client_info": {
+          "package_name": "com.yurian.chat_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26340756166-o75tkk206pmjl2l26gdoeilnk854q3d7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXeuxsfHVntHZ8dtMMBpl8_RzEh7mM4Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26340756166-o75tkk206pmjl2l26gdoeilnk854q3d7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "26340756166-gjn5j9c6cbk7olunp458h4fsa28oo182.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yurian.chatFirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
