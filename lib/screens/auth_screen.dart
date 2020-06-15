@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:chat_firebase/widgets/auth/auth_form.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
     String password,
     String username,
     bool isLogin,
+    File image,
     BuildContext context,
   ) async {
     AuthResult authResult;
@@ -34,10 +38,17 @@ class _AuthScreenState extends State<AuthScreen> {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child(authResult.user.uid + '.jpg');
+        await ref.putFile(image).onComplete;
+        final url = await ref.getDownloadURL();
+
         await Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
-            .setData({'username': username, 'email': email});
+            .setData({'username': username, 'email': email, 'image_url': url});
       }
     } on PlatformException catch (err) {
       String message = 'An error occurred!';

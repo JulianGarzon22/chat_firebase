@@ -15,6 +15,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final String chatId = '3vjTH46uM1UJMPcdaBVB';
 
   String userName = '';
+  String userImage = '';
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     setState(() {
       userName = userDocumentData.data['username'];
+      userImage = userDocumentData.data['image_url'];
     });
   }
 
@@ -51,7 +53,17 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(userName),
+        title: Row(
+          children: <Widget>[
+            CircleAvatar(
+              backgroundImage: NetworkImage(userImage),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20),
+              child: Text(userName),
+            ),
+          ],
+        ),
         actions: <Widget>[
           DropdownButton(
             icon: Icon(
