@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(String, String, String, bool, BuildContext) submitFn;
+  final bool isLoading;
 
-  AuthForm(this.submitFn);
+  AuthForm(this.submitFn, this.isLoading);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -105,22 +106,32 @@ class _AuthFormState extends State<AuthForm> {
                     width: double.infinity,
                     child: RaisedButton(
                       color: Theme.of(context).accentColor,
-                      child: Text(
-                        _isLogin ? 'Login' : 'Register',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                      child: widget.isLoading
+                          ? Container(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Theme.of(context).primaryColor),
+                              ))
+                          : Text(
+                              _isLogin ? 'Login' : 'Register',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                       onPressed: _trySubmit,
                     ),
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          _isLogin = !_isLogin;
-                        });
-                      },
+                      onPressed: widget.isLoading
+                          ? null
+                          : () {
+                              setState(() {
+                                _isLogin = !_isLogin;
+                              });
+                            },
                       child:
                           Text(_isLogin ? 'Register instead' : 'Login instead'),
                     ),

@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Utilities
+  intl: ^0.16.1
+
   # Firebase plugins
   firebase_core: ^0.4.0+9
   firebase_analytics: ^5.0.2

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:chat_firebase/screens/auth_screen.dart';
+import 'package:chat_firebase/screens/chat_screen.dart';
 
 import 'package:chat_firebase/colors/mazarine_blue.dart';
 import 'package:chat_firebase/colors/rise_n_shine.dart';
-
-import 'package:chat_firebase/screens/auth_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +23,16 @@ class MyApp extends StatelessWidget {
         accentColorBrightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        builder: (ctx, snapshot) {
+          if (snapshot.hasData) {
+            return ChatScreen();
+          }
+
+          return AuthScreen();
+        },
+      ),
     );
   }
 }
