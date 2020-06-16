@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,6 +36,8 @@ class _ChatScreenState extends State<ChatScreen> {
       print(msg);
       return;
     });
+
+    fbm.subscribeToTopic('chat');
   }
 
   void getUserName() async {
@@ -82,6 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         actions: <Widget>[
           DropdownButton(
+            underline: Container(),
             icon: Icon(
               Icons.more_vert,
               color: Colors.white,
