@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:chat_firebase/widgets/chats/new_message.dart';
 import 'package:chat_firebase/widgets/chats/messages.dart';
@@ -22,6 +25,19 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
 
     this.getUserName();
+
+    final fbm = FirebaseMessaging();
+    fbm.requestNotificationPermissions();
+    fbm.configure(onMessage: (msg) {
+      print(msg);
+      return;
+    }, onLaunch: (msg) {
+      print(msg);
+      return;
+    }, onResume: (msg) {
+      print(msg);
+      return;
+    });
   }
 
   void getUserName() async {
@@ -101,7 +117,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: Messages(chatId),
             ),
-            NewMessage(chatId)
+            NewMessage(chatId),
           ],
         ),
       ),
